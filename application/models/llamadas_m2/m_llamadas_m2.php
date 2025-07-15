@@ -63,4 +63,39 @@ class M_llamadas_m2 extends CI_Model {
 
         return $hogares;
     }
+    
+    /**
+     * Guarda una nueva llamada en la base de datos
+     * @param array $datos_llamada Arreglo con los datos de la llamada a guardar
+     * @return boolean|integer Retorna el ID de la llamada si se guarda correctamente, o false en caso contrario
+     */
+    public function fm_guardar_llamada($datos_llamada) {
+        try {
+            $this->db->insert('t22_principal_llamadas', $datos_llamada);
+            return $this->db->insert_id(); // Devuelve el ID insertado
+        } catch (Exception $e) {
+            log_message('error', 'Error al guardar llamada: ' . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Obtiene las llamadas registradas para un folio específico
+     * @param string $folio Folio del hogar
+     * @param integer $limite Opcional. Limita la cantidad de llamadas retornadas
+     * @return array Listado de llamadas
+     */
+    public function fm_obtener_llamadas_por_folio($folio, $limite = 10) {
+        $this->db->select('*');
+        $this->db->from('t22_principal_llamadas');
+        $this->db->where('folio', $folio);
+        $this->db->order_by('fecha_hora', 'DESC'); // Más recientes primero
+        
+        if ($limite > 0) {
+            $this->db->limit($limite);
+        }
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

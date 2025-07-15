@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" x-data="app()" x-init="init" :class="{ 'dark': darkMode }">
+<html lang="es" x-data="app()" x-init="init()" :class="{ 'dark': darkMode }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -318,6 +319,49 @@
                             </nav>
                         </div>
                         
+                        <!-- Componente de notificación/alerta para feedback -->                    
+                        <div x-show="mostrarMensaje" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" class="fixed top-20 right-5 z-50 flex items-center p-4 mb-4 shadow-lg rounded-lg" :class="{
+                            'bg-emerald-100 dark:bg-emerald-800/30 text-emerald-700 dark:text-emerald-400': tipoMensaje === 'success',
+                            'bg-red-100 dark:bg-red-800/30 text-red-700 dark:text-red-400': tipoMensaje === 'error',
+                            'bg-amber-100 dark:bg-amber-800/30 text-amber-700 dark:text-amber-400': tipoMensaje === 'warning',
+                            'bg-blue-100 dark:bg-blue-800/30 text-blue-700 dark:text-blue-400': tipoMensaje === 'info'
+                        }" role="alert">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg" :class="{
+                                'bg-emerald-200 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-300': tipoMensaje === 'success',
+                                'bg-red-200 dark:bg-red-800 text-red-600 dark:text-red-300': tipoMensaje === 'error',
+                                'bg-amber-200 dark:bg-amber-800 text-amber-600 dark:text-amber-300': tipoMensaje === 'warning',
+                                'bg-blue-200 dark:bg-blue-800 text-blue-600 dark:text-blue-300': tipoMensaje === 'info'
+                            }">
+                                <!-- Ícono según el tipo de mensaje -->
+                                <template x-if="tipoMensaje === 'success'">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                                    </svg>
+                                </template>
+                                <template x-if="tipoMensaje === 'error'">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.5 11.5a1 1 0 0 1-2 0v-4a1 1 0 0 1 2 0v4Zm-3.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/>
+                                    </svg>
+                                </template>
+                                <template x-if="tipoMensaje === 'warning' || tipoMensaje === 'info'">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+                                    </svg>
+                                </template>
+                            </div>
+                            <div class="ml-3 text-sm font-medium" x-text="mensajeEstado"></div>
+                            <button type="button" class="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex items-center justify-center h-8 w-8 hover:bg-gray-100 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-white" :class="{
+                                'text-emerald-500 dark:text-emerald-400': tipoMensaje === 'success',
+                                'text-red-500 dark:text-red-400': tipoMensaje === 'error',
+                                'text-amber-500 dark:text-amber-400': tipoMensaje === 'warning',
+                                'text-blue-500 dark:text-blue-400': tipoMensaje === 'info'
+                            }" @click="mostrarMensaje = false">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
+                        </div>
+
                         <div class="flex-1 bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md min-h-[400px]">
                             <template x-for="(step, index) in steps" :key="index">
                                 <div x-show="activeStep === index + 1" x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
@@ -326,51 +370,86 @@
                                     
                                     <div class="space-y-4">
                                         <div x-show="activeStep === 1">
-                                            <h3 class="text-2xl font-bold mb-6">Registrar nueva llamada</h3>
-                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                                <!-- Fecha y Hora -->
+                                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                                <!-- Columna Izquierda: Formulario de Registro -->
                                                 <div>
-                                                    <label for="fecha_hora" class="block font-semibold mb-2">Fecha y Hora</label>
-                                                    <input type="datetime-local" id="fecha_hora" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" value="<?php echo date('Y-m-d\TH:i'); ?>">
-                                                </div>
-
-                                                <!-- Resultado -->
-                                                <div>
-                                                    <label for="resultado" class="block font-semibold mb-2">Resultado</label>
-                                                    <div class="relative">
-                                                        <select id="resultado" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg appearance-none focus:ring-2 focus:ring-primary">
-                                                            <option value="" selected disabled>Seleccionar resultado</option>
-                                                            <option value="Contactado">Contactado</option>
-                                                            <option value="No contestó">No contestó</option>
-                                                            <option value="Ocupado">Ocupado</option>
-                                                            <option value="Volver a llamar">Volver a llamar</option>
-                                                            <option value="Número equivocado">Número equivocado</option>
-                                                        </select>
-                                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
-                                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                                                            </svg>
+                                                    <h3 class="text-2xl font-bold mb-6">Registrar nueva llamada</h3>
+                                                <form id="formLlamada">
+                                                    <!-- Campos ocultos para folio e idintegrante -->
+                                                    <input type="hidden" id="folio" name="folio" value="<?php echo $hogar->folio; ?>">
+                                                    <input type="hidden" id="idintegrante" name="idintegrante" value="<?php echo $hogar->idintegrantetitular; ?>">
+                                                    
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                                        <div>
+                                                            <label for="fecha_hora" class="block font-semibold mb-2">Fecha y Hora</label>
+                                                            <input type="datetime-local" id="fecha_hora" name="fecha_hora" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" value="<?php echo date('Y-m-d\TH:i'); ?>">
+                                                        </div>
+                                                        <div>
+                                                            <label for="resultado" class="block font-semibold mb-2">Resultado</label>
+                                                            <div class="relative">
+                                                                <select id="resultado" name="resultado" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg appearance-none focus:ring-2 focus:ring-primary">
+                                                                    <option value="" selected disabled>Seleccionar resultado</option>
+                                                                    <option value="Contactado">Contactado</option>
+                                                                    <option value="No contestó">No contestó</option>
+                                                                    <option value="Ocupado">Ocupado</option>
+                                                                    <option value="Volver a llamar">Volver a llamar</option>
+                                                                    <option value="Número equivocado">Número equivocado</option>
+                                                                </select>
+                                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    
+                                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                                        <div>
+                                                            <label for="duracion" class="block font-semibold mb-2">Duración (minutos)</label>
+                                                            <input type="number" id="duracion" name="duracion" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" placeholder="Ej. 15" min="0" value="0">
+                                                        </div>
+                                                        <div class="hidden md:block"><!-- Espacio vacío para alineación --></div>
+                                                    </div>
+                                                    
+                                                    <div class="mb-6">
+                                                        <label for="notas" class="block font-semibold mb-2">Notas / Observaciones</label>
+                                                        <textarea id="notas" name="notas" rows="3" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" placeholder="Detalles importantes sobre la llamada..."></textarea>
+                                                    </div>
+                                                    
+                                                    <div class="mb-8">
+                                                        <label for="acciones" class="block font-semibold mb-2">Acciones pendientes / Compromisos</label>
+                                                        <textarea id="acciones" name="acciones" rows="3" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" placeholder="Acciones a realizar después de la llamada..."></textarea>
+                                                    </div>
+                                                    
+                                                    <button type="button" id="btnGuardarLlamada" class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition-colors">Guardar Llamada</button>
+                                                </form>
                                                 </div>
-                                            </div>
 
-                                            <!-- Duración -->
-                                            <div class="mb-6">
-                                                <label for="duracion" class="block font-semibold mb-2">Duración (minutos)</label>
-                                                <input type="number" id="duracion" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" min="0">
-                                            </div>
-
-                                            <!-- Notas / Observaciones -->
-                                            <div class="mb-6">
-                                                <label for="notas" class="block font-semibold mb-2">Notas / Observaciones</label>
-                                                <textarea id="notas" rows="4" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" placeholder="Escriba aquí..."></textarea>
-                                            </div>
-
-                                            <!-- Acciones pendientes -->
-                                            <div class="mb-6">
-                                                <label for="acciones" class="block font-semibold mb-2">Acciones pendientes / Compromisos</label>
-                                                <textarea id="acciones" rows="4" class="w-full p-3 bg-slate-100 dark:bg-slate-700 border-none rounded-lg focus:ring-2 focus:ring-primary" placeholder="Escriba aquí..."></textarea>
+                                                <!-- Columna Derecha: Historial de Llamadas -->
+                                                <div class="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-xl">
+                                                    <div class="flex justify-between items-center mb-4">
+                                                        <h3 class="text-xl font-bold">Historial de llamadas</h3>
+                                                        <select class="bg-slate-200 dark:bg-slate-700 border-none rounded-lg text-sm p-2 focus:ring-2 focus:ring-primary">
+                                                            <option>Últimas 5 llamadas</option>
+                                                            <option>Últimas 10 llamadas</option>
+                                                            <option>Todas</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="space-y-4 max-h-[450px] overflow-y-auto pr-2">
+                                                        <template x-for="call in callHistory" :key="call.id">
+                                                            <div @click="openCallDetails(call)" class="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-sm cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+                                                                <div class="flex justify-between items-start">
+                                                                    <div>
+                                                                        <span class="text-xs font-bold px-2 py-1 rounded-full" :class="getStatusColorClasses(call.statusColor)" x-text="call.status"></span>
+                                                                        <span class="text-xs text-slate-500 dark:text-slate-400 ml-2" x-text="call.duration"></span>
+                                                                        <h4 class="font-bold mt-1" x-text="'Llamada realizada el ' + call.date"></h4>
+                                                                    </div>
+                                                                    <button @click.stop="" class="text-slate-400 hover:text-primary"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg></button>
+                                                                </div>
+                                                                <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 truncate" x-text="call.notes"></p>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div x-show="activeStep === 2">
@@ -395,14 +474,54 @@
                                              <label for="historia_hogar" class="font-semibold">Registre los aspectos y avances más significativos de esta visita:</label>
                                              <textarea id="historia_hogar" rows="5" class="w-full mt-1 p-2 border rounded-md bg-slate-50 dark:bg-slate-700 dark:border-slate-600 focus:ring-primary focus:border-primary" placeholder="Escriba aquí..."></textarea>
                                          </div>
-                                    </div>
 
-                                    <div class="mt-8 pt-6 border-t dark:border-slate-700 flex justify-between items-center">
-                                        <button @click="activeStep--" x-show="activeStep > 1" class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-bold py-2 px-4 rounded-lg">Anterior</button>
-                                        <div x-show="activeStep === 1"></div> <button @click="nextStep()" x-show="activeStep < steps.length" class="bg-primary hover:bg-primary-700 text-white font-bold py-2 px-4 rounded-lg">Guardar y Continuar</button>
-                                        <button @click="finishVisit()" x-show="activeStep === steps.length" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg">Finalizar Visita</button>
+                                     <!-- Botones de Navegación -->
+                                     <div class="flex justify-between items-center mt-8 pt-6 border-t border-slate-200 dark:border-slate-700">
+                                         <button @click="activeStep = Math.max(1, activeStep - 1)" :disabled="activeStep === 1" class="px-6 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed">Anterior</button>
+                                         <template x-if="activeStep < steps.length">
+                                             <button @click="nextStep()" class="px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90">Siguiente</button>
+                                         </template>
+                                         <template x-if="activeStep === steps.length">
+                                             <button @click="finishVisit()" class="px-6 py-2 bg-emerald-500 text-white rounded-lg font-semibold hover:bg-emerald-600">Finalizar Visita</button>
+                                         </template>
+                                     </div>
+
+                                    <!-- Modal de Detalles de la Llamada -->
+                                    <div x-show="isModalOpen" @keydown.escape.window="isModalOpen = false" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" x-cloak>
+                                        <div @click.away="isModalOpen = false" class="relative bg-white dark:bg-slate-800 w-full max-w-2xl mx-4 p-8 rounded-2xl shadow-xl" x-show="isModalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
+                                            <button @click="isModalOpen = false" class="absolute top-4 right-4 text-slate-400 hover:text-primary">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                            </button>
+                                            <h3 class="text-2xl font-bold mb-1">Detalles de la llamada</h3>
+                                            <p class="text-slate-500 dark:text-slate-400 mb-6">Llamada realizada el <span x-text="selectedCall?.date"></span> por: <span class="font-semibold">Juan Pérez</span></p>
+
+                                            <div class="space-y-4 text-slate-600 dark:text-slate-300">
+                                                <div>
+                                                    <h4 class="font-bold text-slate-800 dark:text-slate-200">Notas / Observaciones</h4>
+                                                    <p x-text="selectedCall?.notes"></p>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-bold text-slate-800 dark:text-slate-200">Acciones pendientes / Compromisos</h4>
+                                                    <p x-text="selectedCall?.actions"></p>
+                                                </div>
+                                                <div>
+                                                    <h4 class="font-bold text-slate-800 dark:text-slate-200">Logros discutidos</h4>
+                                                    <div class="flex flex-wrap gap-2 mt-2">
+                                                        <template x-for="logro in selectedCall?.logros" :key="logro">
+                                                            <span class="px-3 py-1 text-sm rounded-full bg-primary/10 text-primary font-medium" x-text="logro"></span>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-8 text-center">
+                                                <button class="px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 text-base">
+                                                    <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 5.232z"></path></svg>
+                                                    Editar Llamada
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
                             </template>
                         </div>
                     </div>
@@ -411,9 +530,23 @@
                         function visitaHogar() {
                             return {
                                 activeStep: 1,
+                                // Al cargar la vista, ejecutar init() que cargará el historial
+                                $nextTick() { this.init(); },
                                 completedSteps: [],
-                                porcentajeLogros: 65,
-                                paso0: { lugar: 'Si', motivo: '' },
+                                isModalOpen: false,
+                                selectedCall: null,
+                                callHistory: [], // Se llenará dinámicamente desde el backend
+                                // Estado para mensajes de feedback
+                                mostrarMensaje: false,
+                                mensajeEstado: '',
+                                tipoMensaje: 'info',
+                                
+                                // Método de inicialización
+                                init() {
+                                    console.log('Inicializando componente visitaHogar...');
+                                    // Cargar el historial de llamadas al iniciar
+                                    this.cargarHistorialLlamadas();
+                                },
                                 steps: [
                                     { title: 'Paso 1', subtitle: 'Realización de la visita', description: 'Registre la información de la llamada.' },
                                     { title: 'Paso 2', subtitle: 'Actualización de datos', description: 'El Gestor saluda y verifica si el hogar o alguno de sus integrantes requiere actualizar sus datos generales.' },
@@ -431,8 +564,203 @@
                                 },
                                 finishVisit() {
                                     alert('Visita finalizada y registrada. Redirigiendo al panel principal.');
-                                    // In a real app, you would save final data and then change view
                                     this.goBack();
+                                },
+                                openCallDetails(call) {
+                                    this.selectedCall = call;
+                                    this.isModalOpen = true;
+                                },
+                                cargarHistorialLlamadas() {
+                                    const folioInput = document.getElementById('folio');
+                                    if (!folioInput) {
+                                        console.error('Elemento con ID "folio" no encontrado');
+                                        this.mostrarMensajeTemporalmente('Error: No se pudo obtener el folio', 'error');
+                                        return;
+                                    }
+                                    
+                                    const folio = folioInput.value;
+                                    if (!folio) {
+                                        console.error('El valor del folio está vacío');
+                                        this.mostrarMensajeTemporalmente('Error: Folio no válido', 'error');
+                                        return;
+                                    }
+                                    
+                                    // Mostrar indicador de carga
+                                    this.callHistory = [];
+                                    
+                                    // Hacer petición AJAX
+                                    $.ajax({
+                                        url: '<?php echo site_url('llamadas_m2/c_llamadas_m2/obtener_historial_llamadas'); ?>',
+                                        type: 'GET',
+                                        data: { folio: folio },
+                                        dataType: 'json',
+                                        success: (response) => {
+                                            if (response.success) {
+                                                this.callHistory = response.calls || [];
+                                                // Si no hay llamadas, mostrar mensaje
+                                                if (this.callHistory.length === 0) {
+                                                    this.mostrarMensajeTemporalmente('No hay llamadas registradas para este folio', 'info');
+                                                }
+                                            } else {
+                                                this.mostrarMensajeTemporalmente('Error al cargar el historial: ' + response.message, 'error');
+                                            }
+                                        },
+                                        error: () => {
+                                            this.mostrarMensajeTemporalmente('Error de conexión al cargar el historial', 'error');
+                                        }
+                                    });
+                                },
+                                mostrarMensajeTemporalmente(mensaje, tipo) {
+                                    // Establecer mensaje y tipo
+                                    this.mensajeEstado = mensaje;
+                                    this.tipoMensaje = tipo;
+                                    this.mostrarMensaje = true;
+                                    
+                                    // Registrar en consola para depuración
+                                    console.log(`Mensaje mostrado: ${mensaje} (${tipo})`);
+                                    
+                                    // Ocultar después de 5 segundos
+                                    setTimeout(() => {
+                                        this.mostrarMensaje = false;
+                                    }, 5000);
+                                },
+                                getStatusColorClasses(color) {
+                                    const colors = {
+                                        amber: 'bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300',
+                                        emerald: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300',
+                                        red: 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300',
+                                        slate: 'bg-slate-100 text-slate-800 dark:bg-slate-900/50 dark:text-slate-300'
+                                    };
+                                    return colors[color] || colors.slate;
+                                },
+                                limpiarFormulario() {
+                                    try {
+                                        const fechaHoraInput = document.getElementById('fecha_hora');
+                                        if (fechaHoraInput) fechaHoraInput.value = '<?php echo date('Y-m-d\\TH:i'); ?>';
+                                        
+                                        const resultadoInput = document.getElementById('resultado');
+                                        if (resultadoInput) resultadoInput.value = '';
+                                        
+                                        const duracionInput = document.getElementById('duracion');
+                                        if (duracionInput) duracionInput.value = '0';
+                                        
+                                        const notasInput = document.getElementById('notas');
+                                        if (notasInput) notasInput.value = '';
+                                        
+                                        const accionesInput = document.getElementById('acciones');
+                                        if (accionesInput) accionesInput.value = '';
+                                    } catch(error) {
+                                        console.error('Error al limpiar formulario:', error);
+                                    }
+                                },
+                                init() {
+                                    // Cargar el historial de llamadas al iniciar
+                                    this.cargarHistorialLlamadas();
+                                    
+                                    // Configurar el manejo del formulario
+                                    $(document).ready(() => {
+                                        try {
+                                            // Verificar que el botón exista antes de asignar el evento
+                                            const btnGuardarLlamada = $('#btnGuardarLlamada');
+                                            if (btnGuardarLlamada.length === 0) {
+                                                console.error('Botón #btnGuardarLlamada no encontrado');
+                                                return;
+                                            }
+                                            
+                                            // Manejar el clic en el botón de guardar
+                                            btnGuardarLlamada.on('click', (e) => {
+                                                e.preventDefault();
+                                                console.log('Botón guardar llamada clickeado');
+                                                
+                                                try {
+                                                    // Verificar que los elementos del formulario existan
+                                                    const fecha_hora_el = $('#fecha_hora');
+                                                    const resultado_el = $('#resultado');
+                                                    const folio_el = $('#folio');
+                                                    const idintegrante_el = $('#idintegrante');
+                                                    const duracion_el = $('#duracion');
+                                                    const notas_el = $('#notas');
+                                                    const acciones_el = $('#acciones');
+                                                    
+                                                    // Validar existencia de elementos críticos
+                                                    if (fecha_hora_el.length === 0 || resultado_el.length === 0 || 
+                                                        folio_el.length === 0 || idintegrante_el.length === 0) {
+                                                        this.mostrarMensajeTemporalmente('Error: Elementos del formulario no encontrados', 'error');
+                                                        console.error('Elementos del formulario faltantes');
+                                                        return;
+                                                    }
+                                                    
+                                                    // Obtener valores
+                                                    const fecha_hora = fecha_hora_el.val();
+                                                    const resultado = resultado_el.val();
+                                                    
+                                                    // Validar campos requeridos
+                                                    if (!fecha_hora) {
+                                                        this.mostrarMensajeTemporalmente('La fecha y hora es requerida', 'error');
+                                                        return;
+                                                    }
+                                                    
+                                                    if (!resultado) {
+                                                        this.mostrarMensajeTemporalmente('El resultado de la llamada es requerido', 'error');
+                                                        return;
+                                                    }
+                                                    
+                                                    // Obtener datos del formulario de manera segura
+                                                    const formData = {
+                                                        folio: folio_el.val(),
+                                                        idintegrante: idintegrante_el.val(),
+                                                        fecha_hora: fecha_hora,
+                                                        resultado: resultado,
+                                                        duracion: duracion_el.length ? duracion_el.val() : '0',
+                                                        notas: notas_el.length ? notas_el.val() : '',
+                                                        acciones: acciones_el.length ? acciones_el.val() : ''
+                                                    };
+                                                    
+                                                    console.log('Datos del formulario:', formData);
+                                                    
+                                                    // Mostrar indicador de carga
+                                                    btnGuardarLlamada.prop('disabled', true).text('Guardando...');
+                                                    
+                                                    // Enviar datos mediante AJAX
+                                                    $.ajax({
+                                                        url: '<?php echo site_url("llamadas_m2/c_llamadas_m2/guardar_llamada"); ?>',
+                                                        type: 'POST',
+                                                        data: formData,
+                                                        dataType: 'json',
+                                                        success: (response) => {
+                                                            if (response.success) {
+                                                                // Mostrar mensaje de éxito
+                                                                this.mostrarMensajeTemporalmente('Llamada guardada con éxito', 'success');
+                                                                
+                                                                // Limpiar formulario
+                                                                this.limpiarFormulario();
+                                                                
+                                                                // Recargar historial de llamadas
+                                                                this.cargarHistorialLlamadas();
+                                                            } else {
+                                                                this.mostrarMensajeTemporalmente('Error al guardar la llamada: ' + (response.message || 'Error desconocido'), 'error');
+                                                            }
+                                                        },
+                                                        error: (xhr, status, error) => {
+                                                            console.error('Error AJAX:', status, error);
+                                                            this.mostrarMensajeTemporalmente('Error de conexión al guardar la llamada', 'error');
+                                                        },
+                                                        complete: () => {
+                                                            // Restaurar el botón
+                                                            btnGuardarLlamada.prop('disabled', false).text('Guardar Llamada');
+                                                        }
+                                                    });
+                                                } catch(error) {
+                                                    console.error('Error al procesar el formulario:', error);
+                                                    this.mostrarMensajeTemporalmente('Error interno al procesar el formulario', 'error');
+                                                    btnGuardarLlamada.prop('disabled', false);
+                                                }
+                                            });
+                                        } catch(error) {
+                                            console.error('Error al inicializar el botón de guardar:', error);
+                                        }
+                                        });
+                                    });
                                 }
                             }
                         }

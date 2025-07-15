@@ -42,6 +42,160 @@ class C_llamadas_m2 extends CI_Controller {
         $this->load->view('llamadas_m2/v_gestion_hogares', $data);
     }
 
+    public function obtener_historial_llamadas() {
+        // Validación básica
+        if (!$this->input->is_ajax_request()) {
+            show_404();
+            return;
+        }
+        
+        // Obtener parámetros
+        $folio = $this->input->post('folio');
+        if (empty($folio)) {
+            $folio = $this->input->get('folio');
+        }
+        
+        if (empty($folio)) {
+            // Responder con error si falta el folio
+            $response = array(
+                'success' => false,
+                'message' => 'Falta el folio',
+                'historial' => array()
+            );
+            echo json_encode($response);
+            return;
+        }
+        
+        // Cargar modelo
+        $this->load->model('llamadas_m2/m_llamadas_m2');
+        
+        // Obtener historial
+        try {
+            $historial = $this->m_llamadas_m2->fm_obtener_llamadas_por_folio($folio); // Usar el método correcto
+            
+            // Preparar respuesta
+            $response = array(
+                'success' => true,
+                'message' => 'Historial obtenido correctamente',
+                'historial' => $historial
+            );
+        } catch (Exception $e) {
+            log_message('error', 'Error al obtener historial: ' . $e->getMessage());
+            $response = array(
+                'success' => false,
+                'message' => 'Error al obtener el historial',
+                'historial' => array()
+            );
+        }
+        
+        // Enviar respuesta JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+    
+    /**
+     * Guarda una nueva llamada en la base de datos
+     * Método para recibir los datos AJAX del formulario de llamadas
+     */
+    public function guardar_llamada() {
+        // Validación básica
+        if (!$this->input->is_ajax_request()) {
+            show_404();
+            return;
+        }
+        
+        // Obtener datos del POST
+        $folio = $this->input->post('folio');
+        $idintegrante = $this->input->post('idintegrante');
+        $fecha_hora = $this->input->post('fecha_hora');
+        $resultado = $this->input->post('resultado');
+        $duracion = $this->input->post('duracion');
+        $notas = $this->input->post('notas');
+        $documento_profesional = $this->input->post('documento_profesional');
+        
+        // Validar datos requeridos
+        if (empty($folio) || empty($idintegrante) || empty($fecha_hora) || empty($resultado)) {
+            $response = array(
+                'success' => false,
+                'message' => 'Faltan campos obligatorios'
+            );
+            echo json_encode($response);
+            return;
+        }
+        
+        // Preparar datos para la inserción según la estructura de la tabla
+        $datos_llamada = array(
+            'folio' => $folio,
+            'idintegrante' => $idintegrante,
+            'fecha_hora' => $fecha_hora,
+            'resultado' => $resultado,
+            'duracion_minutos' => $duracion,
+            'notas_observaciones' => $notas,
+            'documento_profesional' => $documento_profesional,
+            'fecharegistro' => date('Y-m-d H:i:s'),
+            'estado_eliminado' => 0
+        );
+        
+        // Guardar en la base de datos
+        $this->load->model('llamadas_m2/m_llamadas_m2');
+        $resultado_insert = $this->m_llamadas_m2->fm_guardar_llamada($datos_llamada);
+        
+        // Preparar respuesta
+        if ($resultado_insert) {
+            $response = array(
+                'success' => true,
+                'message' => 'Llamada guardada correctamente',
+                'id_llamada' => $resultado_insert
+            );
+        } else {
+            $response = array(
+                'success' => false,
+                'message' => 'Error al guardar la llamada'
+            );
+        }
+        
+        // Enviar respuesta JSON
+        echo json_encode($response);
+    }
+    
+    public function vista_hogar_simple($folio = null) {
+        // Verificar si hay un folio
+        if ($folio === null) {
+            redirect('llamadas_m2/c_llamadas_m2');
+            return;
+        }
+        
+        // Obtener el documento del profesional de la sesión
+        $doccogestor = $this->session->userdata('documento');
+        
+        // Obtener datos del hogar
+        $data['hogar'] = $this->m_llamadas_m2->fm_obtener_hogar_por_folio($folio);
+        
+        // Verificar que el hogar existe y pertenece al cogestor
+        if (!$data['hogar'] || $this->m_llamadas_m2->fm_hogar_pertenece_a_cogestor($folio, $doccogestor) == 0) {
+            $this->session->set_flashdata('mensaje', 'No se encontró el hogar con el folio proporcionado.');
+            redirect('llamadas_m2/c_llamadas_m2');
+            return;
+        }
+        
+        // Obtener porcentaje de logros (igual que en gestion_hogar)
+        $logros = $this->m_dimensiones->fm_totalporcentajelogros($folio);
+        $porceverd = 0;
+        $porcegris = 0;
+        if (!empty($logros)) {
+            $porceverd = isset($logros[0]->porceverd) ? floatval($logros[0]->porceverd) : 0;
+            $porcegris = isset($logros[0]->porcegris) ? floatval($logros[0]->porcegris) : 0;
+        }
+        $porcetotal = $porceverd + $porcegris;
+        $data['porcentaje_total'] = round($porcetotal);
+        
+        // Configuración adicional
+        $data['vista_actual'] = 'gestion'; // Para resaltar el menú correcto
+        
+        // Cargar la vista simplificada
+        $this->load->view('llamadas_m2/v_gestion_hogares_simple', $data);
+    }
+
     public function index() {
         $this->load->library('pagination');
         $doccogestor = $this->session->userdata('documento');
