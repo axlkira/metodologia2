@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title><?php echo $titulo ?>  </title>
+    <link rel="stylesheet" href="<?php echo BOOTSTRAP, 'css/bootstrap1.min.css'; ?>" >
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="es"/>
+
+</head>
+<body>  
+    <div class="container">
+        <!--head-->
+        <?php echo($head); ?>
+        <!-- fin head-->
+        
+        <!--para tener la variable de idvivienda-->
+        <input type="text" class="form-control input-sm" id="folio" name="folio"  style="display:none"   placeholder="folio" value="<?php echo($folio); ?>">
+        <input type="text" class="form-control input-sm" id="idintegrante" name="idintegrante"  style="display:none"   placeholder="idintegrante" value="<?php echo($idintegrante); ?>">
+          <input type="text" class="form-control input-sm" id="edad" name="edad"  style="display:none"   placeholder="" value="<?php echo($arraydatosgenerales['eedadintegrante']); ?>">
+        <input type="text" class="form-control input-sm" id="sexo" name="sexo"  style="display:none"   placeholder="" value="<?php echo($arraydatosgenerales['esexointegrante']); ?>">
+        <!--fin para imprimir el idintegrante y llevarlo-->
+<hr>
+        <form class="form-group" name="formulario" id="formulario">
+
+            <!--inicio radio una sola seleccion-->
+            <!--Se trae la respuesta de la linea de clasificacion del c4p9-->
+            <div class="row">
+            <div id="c4p9div"  name="c4p9div" <?php if($arrayrespuestas['eppc1p2n3']==''){echo('class="form-group col-md-12 form-group-sm has-error"');}else{echo('class="form-group col-md-12 form-group-sm"');}?>>   
+                <label class="control-label">2.3 LIBRETA MILITAR
+                    <button type="button" id="vayuda" name="vayuda" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal">
+                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Ayuda
+                    </button>
+                </label>
+                <div class="radio">
+                    <label><!--en este caso se manda a la fincion javascript el valor del campo-->
+                        <input type="radio"name="c4p9" id="c4p9" onclick="colocaropcionppc1p2n3('1','valorc4p9','c4p9div');" value="1" <?php if($arrayrespuestas['eppc1p2n3']=='1'){echo('checked');}?>>
+                        Si
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio"name="c4p9" id="c4p9" onclick="colocaropcionppc1p2n3('2','valorc4p9','c4p9div');" value="2" <?php if($arrayrespuestas['eppc1p2n3']=='2'){echo('checked');}?>>
+                        No
+                    </label>             
+                </div> 
+                
+                 <div class="radio">
+                    <label>
+                        <input type="radio"name="c4p9" id="c4p9" onclick="colocaropcionppc1p2n3('5','valorc4p9','c4p9div');" value="5" <?php if($arrayrespuestas['eppc1p2n3']=='5'){echo('checked');}?>>
+                        Desinteres
+                    </label>             
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio"name="c4p9" id="c4p9" onclick="colocaropcionppc1p2n3('98','valorc4p9','c4p9div');" value="98" <?php if($arrayrespuestas['eppc1p2n3']=='98'){echo('checked');}?>>
+                        No aplica
+                    </label>             
+                </div>
+            <input type="text" class="form-control" id="valorc4p9" name="valorc4p9" style="display:none"  placeholder="Text input" value="<?php echo($arrayrespuestas['eppc1p2n3']); ?>">
+            </div>
+            
+            <div id="ppc1p2n3ndiv" name="ppc1p2n3ndiv" <?php if($arrayrespuestas['eppc1p2n3']=='1'&& $arrayrespuestas['enumero_libretamilitar']!=''){echo('class="form-group col-md-12 form-group-sm"');}else if($arrayrespuestas['eppc1p2n3']=='1'){echo('class="form-group col-md-12 form-group-sm has-error"');}else{echo('class="form-group col-md-12 form-group-sm" style="display:none"');}?>>   
+            <label class="control-label">Numero</label>
+            <div class="radio">
+                    <label><!--en este caso se manda a la fincion javascript el valor del campo-->
+                    <input type="text" class="form-control" id="ppc1p2n3n" name="ppc1p2n3n" size="100" onKeyPress="return soloNumeros(event)" onchange="validarbolitasytexto('ppc1p2n3ndiv','ppc1p2n3n')" placeholder="Numero libreta" value="<?php echo($arrayrespuestas['enumero_libretamilitar']); ?>">
+                    </label>
+            </div>
+            
+        </div>
+            <div id="ppc1p2n3cdiv"  name="ppc1p2n3cdiv" <?php if($arrayrespuestas['eppc1p2n3']=='1'&& $arrayrespuestas['eclase_libretamilitar']!=''){echo('class="form-group col-md-12 form-group-sm"');}else if($arrayrespuestas['eppc1p2n3']=='1'){echo('class="form-group col-md-12 form-group-sm has-error"');}else{echo('class="form-group col-md-12 form-group-sm" style="display:none"');}?>>   
+                <label class="control-label">CLASE
+                </label>
+                <div class="radio">
+                    <label><!--en este caso se manda a la fincion javascript el valor del campo-->
+                        <input type="radio" name="ppc1p2n3c" id="ppc1p2n3c" onclick="colocaropcion('c1p2n3o1','valorppc1p2n3c','ppc1p2n3cdiv');" value="c1p2n3o1" <?php if($arrayrespuestas['eclase_libretamilitar']=='c1p2n3o1'){echo('checked');}?>>
+                        Primera clase
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="ppc1p2n3c" id="ppc1p2n3c1" onclick="colocaropcion('c1p2n3o2','valorppc1p2n3c','ppc1p2n3cdiv');" value="c1p2n3o2" <?php if($arrayrespuestas['eclase_libretamilitar']=='c1p2n3o2'){echo('checked');}?>>
+                        Segunda clase
+                    </label>             
+                </div> 
+                <input type="text" class="form-control" id="valorppc1p2n3c" name="valorppc1p2n3c" style="display:none" placeholder="Text input" value="<?php echo($arrayrespuestas['eclase_libretamilitar']); ?>">
+            </div>
+            </div> 
+            <!--fin radio una sola seleccion-->
+            
+            <!-- Modal Ayuda-->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Ayuda</h4>
+                  </div>
+                  <div class="modal-body">
+                    ... <?php echo($textoayuda); ?>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal -->
+
+            <!--inicio botonera guardar y actualizar-->
+            <?php if($arrayrespuestas['enumero_libretamilitar']=="")
+            {
+                echo($botonerag);
+            }
+            else
+            {
+                echo($botoneraa);
+            }?>   
+            <!--Fin botonera guardar y actualizar-->
+
+        </form>
+    
+    <!--Inicio Este es el footer NO TOCAR-->
+    <?php echo($foot); ?>
+    <!--fin del footer NO TOCAR-->
+    </div>
+    
+    <!--Inicio de los enlaces-->
+    <script src="<?php echo BOOTSTRAP, 'js/jquery-1.11.0.js' ?>"></script>
+    <script src="<?php echo BOOTSTRAP, 'js/bootstrap.min.js' ?>"></script>
+    <script src="<?php echo BOOTSTRAP, 'js/jquery.bootstrap.wizard.js' ?>"></script>
+    <script src="<?php echo BOOTSTRAP, 'js/prettify.js' ?>"></script>
+    <script src="<?php echo JBOX, 'Source/jBox.min.js' ?>"></script>
+    <script src="<?php echo JSPERFIL, 'jsfechas.js' ?>"></script>
+    <script src="<?php echo JSPERFIL, 'jsmensajes.js' ?>"></script>
+    <script src="<?php echo JSPERFIL, 'jsvalidarcampos.js' ?>"></script>
+    <script src="<?php echo JSPERFIL, 'jsvalidarletrasnumeros.js' ?>"></script>
+    <script src="<?php echo JSPERFIL, 'jsbotones.js' ?>"></script>
+    <script src="<?php echo JSPERFIL, 'jscargardatos.js' ?>"></script>
+    <link href="<?php echo JBOX, 'Source/jBox.css' ?>" rel="stylesheet">
+    <!--Inicio de los enlaces-->
+</body>
+
+<script> 
+///////////////////////////////////////Funciones que llaman al controlador para guardar y actualizar////////////////////////////////////////////////////////////////////////    
+    $(document).ready(function()
+    {   
+        $("#guardar").click(function ()
+        {
+                        $.ajax({
+                          url: "fc_actualizar",
+                          type: "GET",
+                          data: {vfolio : $('#folio').val(),vidintegrante : $('#idintegrante').val(), vvalorc4p9 : $('#valorc4p9').val(),
+                           vppc1p2n3n : $('#ppc1p2n3n').val(), vvalorppc1p2n3c : $('#valorppc1p2n3c').val()},    
+                          dataType: "html",
+                          success : function(obj){                      
+                          botonguardar();
+                          }
+                        });                    
+        });
+       $("#actualizar").click(function ()
+        {
+                        $.ajax({
+                          url: "fc_actualizar",
+                          type: "GET",
+                          data: {vfolio : $('#folio').val(),vidintegrante : $('#idintegrante').val(), vvalorc4p9 : $('#valorc4p9').val(),
+                          vppc1p2n3n : $('#ppc1p2n3n').val(), vvalorppc1p2n3c : $('#valorppc1p2n3c').val()},
+                          dataType: "html",
+                          success : function(obj){                      
+                          botonguardar();
+                          }
+                        });                    
+        });
+        $("#siguiente").click(function ()
+        {
+         botonsiguiente();
+         location.href = "../c_ppc1p2n5/fc_ppc1p2n5?folio=" + $('#folio').val() +  "&idintegrante=" + $('#idintegrante').val() +"";                    
+
+        });
+              
+        $("#anterior").click(function ()
+        {
+         botonanterior();
+        // location.href = "../c_ppc1p2n3/fc_ppc1p2n3?folio=" + $('#folio').val() +  "&idintegrante=" + $('#idintegrante').val() +"";                    
+        location.href = "../c_ppcapitulosintegrante/fc_ppcapitulosintegrante?folio=" + $('#folio').val() +  "&idintegrante=" + $('#idintegrante').val() +"";                    
+        });
+
+//para cargar variables capitulo, pregunta,encuestador,vivienda,barra
+cargardatosgenerales('<?php echo($arraydatosgenerales['ecapitulo']); ?>','Pregunta 2.3 de 5.1','<?php echo($arraydatosgenerales['enomcoges']); ?>','<?php echo($arraydatosgenerales['enombreintegrante']." "." - "." "."Sexo:"." ".$arraydatosgenerales['esexointegrante']."   "."  -  "."   "."Edad:"."   ".$arraydatosgenerales['eedadintegrante']); ?>','12');
+//control del boton ayuda
+botonayuda();
+
+});
+
+// colocar opcion para todos
+function colocaropcionppc1p2n3(opcion,campoval,divcampo)
+{
+   //esta linea me guarda el valor del campo
+    $('#' + campoval).val(opcion);
+          if(opcion == '1')
+            {
+               // //alert('aca lo muestra');
+                $('#ppc1p2n3ndiv').show();
+                $('#ppc1p2n3cdiv').show();
+                $('#ppc1p2n3n').val('');
+                $('#ppc1p2n3c1').val('');
+                $('#valorppc1p2n3c').val('');
+                
+                $('#ppc1p2n3ndiv').addClass(' has-error'); 
+                $('#ppc1p2n3cdiv').addClass(' has-error'); 
+                
+            }
+            else
+            {
+          //      //alert('aca lo oculta');
+                $('#ppc1p2n3ndiv').hide();
+                $('#ppc1p2n3cdiv').hide();
+                $('#ppc1p2n3n').val('98');
+                $('#valorppc1p2n3c').val('98');
+                
+                $('#ppc1p2n3ndiv').removeClass(' has-error');
+                $('#ppc1p2n3cdiv').removeClass(' has-error');
+                
+                $('#ppc1p2n3c').prop('checked' , false);
+                $('#ppc1p2n3c1').prop('checked' , false);
+                
+            }
+          
+    validarbolitasytextoc1p2n3(divcampo,campoval);
+}
+//de aca para arriba es logica de bolas y textos
+//validar bolitas y texto
+function validarbolitasytextoc1p2n3(div,campo)
+{ //alert(div + ' juanpis ' + campo);
+   if(($('#'+ campo).val() == '') || ($('#'+ campo).val() == '0'))
+   { 
+       $('#' + div).addClass(' has-error');
+   }
+   else
+   { 
+       $('#' + div).removeClass('has-error');
+   }
+    validarguardar();
+}
+
+</script>
+</html>
