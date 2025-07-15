@@ -281,14 +281,6 @@
                             <div id="step-3" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
                                 <h2 class="text-xl font-bold mb-4">Logros</h2>
                                 <p>Información sobre los logros conseguidos por la familia.</p>
-                                <div class="mt-6">
-                                    <a href="<?php echo site_url('logros/c_dimensiones/fc_dimensiones').'?folio='.htmlspecialchars($hogar->folio).'&idintegrante=0&doccogestor='.$this->session->userdata('documento'); ?>" target="_blank" class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/80 text-white font-medium rounded-lg transition-colors duration-300">
-                                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                                        </svg>
-                                        Ver Logros
-                                    </a>
-                                </div>
                             </div>
                             
                             <!-- Paso 4: Gestión del Hogar -->
@@ -298,10 +290,10 @@
                             </div>
                             
                             <!-- Paso 5: Finalización -->
-                          <!--   <div id="step-5" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
+                            <div id="step-5" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
                                 <h2 class="text-xl font-bold mb-4">Finalización</h2>
                                 <p>Finalización de la visita y conclusiones.</p>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </main>
@@ -329,8 +321,7 @@
             { id: 2, title: 'Paso 2', subtitle: 'Actualización de datos', element: document.getElementById('step-2') },
             { id: 3, title: 'Paso 3', subtitle: 'Logros', element: document.getElementById('step-3') },
             { id: 4, title: 'Paso 4', subtitle: 'Gestión del Hogar', element: document.getElementById('step-4') },
-            // Paso 5 comentado ya que el elemento ha sido eliminado
-            // { id: 5, title: 'Paso 5', subtitle: 'Finalización', element: document.getElementById('step-5') },
+            { id: 5, title: 'Paso 5', subtitle: 'Finalización', element: document.getElementById('step-5') }
         ];
         
         // Estado de la aplicación
@@ -653,11 +644,8 @@
             `;
             
             // Abrir modal
-            const modalOverlay = document.getElementById('modal-overlay');
-            if (modalOverlay) {
-                modalOverlay.classList.remove('hidden');
-                modalOverlay.classList.add('flex');
-            }
+            document.getElementById('modal-overlay').classList.remove('hidden');
+            document.getElementById('modal-overlay').classList.add('flex');
         }
         
         // Inicializar el modal
@@ -665,33 +653,27 @@
             const closeButton = document.getElementById('modal-close');
             const modalOverlay = document.getElementById('modal-overlay');
             
-            if (closeButton && modalOverlay) {
-                closeButton.addEventListener('click', closeModal);
-                
-                modalOverlay.addEventListener('click', function(e) {
-                    if (e.target === modalOverlay) {
-                        closeModal();
-                    }
-                });
-            }
+            // Cerrar modal al hacer clic en el botón de cerrar
+            closeButton.addEventListener('click', closeModal);
+            
+            // Cerrar modal al hacer clic fuera del contenido
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
         }
         
         // Cerrar modal
         function closeModal() {
-            const modalOverlay = document.getElementById('modal-overlay');
-            if (modalOverlay) {
-                modalOverlay.classList.add('hidden');
-                modalOverlay.classList.remove('flex');
-            }
+            document.getElementById('modal-overlay').classList.add('hidden');
+            document.getElementById('modal-overlay').classList.remove('flex');
             appState.selectedCall = null;
         }
         
         // Inicializar el formulario de llamadas
         function initCallForm() {
-            const guardarLlamada = document.getElementById('guardar-llamada');
-            if (guardarLlamada) {
-                guardarLlamada.addEventListener('click', submitCallForm);
-            }
+            document.getElementById('guardar-llamada').addEventListener('click', submitCallForm);
         }
         
         // Enviar formulario de llamadas

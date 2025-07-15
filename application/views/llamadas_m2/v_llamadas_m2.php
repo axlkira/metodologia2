@@ -143,14 +143,14 @@
                         Directorio Hogares
                     </a>
                     
-                    <a href="#" @click.prevent="setView('seguimiento')" class="flex items-center px-4 py-2.5 rounded-lg transition-colors duration-200" :class="{ 'bg-primary/10 text-primary dark:bg-primary/20': currentView === 'seguimiento', 'hover:bg-slate-100 dark:hover:bg-slate-700': currentView !== 'seguimiento' }">
+                    <!-- <a href="#" @click.prevent="setView('seguimiento')" class="flex items-center px-4 py-2.5 rounded-lg transition-colors duration-200" :class="{ 'bg-primary/10 text-primary dark:bg-primary/20': currentView === 'seguimiento', 'hover:bg-slate-100 dark:hover:bg-slate-700': currentView !== 'seguimiento' }">
                         <svg class="w-6 h-6 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
                         Seguimiento Telefónico
-                    </a>
+                    </a> -->
                    
                 </nav>
 
-                <div class="p-4 border-t border-slate-200 dark:border-slate-700">
+          <!--       <div class="p-4 border-t border-slate-200 dark:border-slate-700">
                     <div class="flex items-center">
                         <img class="h-10 w-10 rounded-full object-cover" src="https://placehold.co/100x100/6366f1/white?text=A" alt="Avatar de usuario">
                         <div class="ml-3">
@@ -159,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </aside>
         
         <div x-show="isSidebarOpen" @click="isSidebarOpen = false" class="fixed inset-0 bg-black/30 z-30 lg:hidden" x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
@@ -177,13 +177,13 @@
                     </div>
                     
                     <div class="flex items-center gap-4">
-                         <button class="relative text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white">
+                         <!-- <button class="relative text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
                             <span class="absolute -top-1 -right-1 flex h-3 w-3">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
                             </span>
-                        </button>
+                        </button> -->
                         
                         <button @click="toggleTheme()" class="text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white">
                              <svg x-show="!darkMode" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
@@ -200,10 +200,10 @@
               
 
                 <div x-show="currentView === 'seguimiento'" x-transition>
-                    <div class="flex items-center justify-between mb-6">
+                  <!--   <div class="flex items-center justify-between mb-6">
                         <h1 class="text-3xl font-bold">Seguimiento Telefónico</h1>
                         <button class="bg-primary hover:bg-primary-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>Registrar Llamada</button>
-                    </div>
+                    </div> -->
                     <div class="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm text-left">
