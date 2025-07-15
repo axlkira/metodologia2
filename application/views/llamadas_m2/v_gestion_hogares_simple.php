@@ -113,7 +113,7 @@
                     
                     <div class="overflow-y-auto flex-1 p-4">
                         <nav class="space-y-2">
-                            <a href="#" class="flex items-center px-4 py-2.5 rounded-lg bg-primary text-white transition-colors">
+                            <a href="../../../../llamadas_m2/c_llamadas_m2" class="flex items-center px-4 py-2.5 rounded-lg bg-primary text-white transition-colors">
                                 <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                 </svg>
@@ -135,14 +135,13 @@
                                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
                             </button>
                             <div class="relative hidden sm:block">
-                                <svg class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-                                <input type="text" placeholder="Buscar por Folio o Integrante..." class="w-full max-w-xs pl-10 pr-4 py-2 bg-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                               
                             </div>
                         </div>
                         
                         <div class="flex items-center gap-4">
                             <button class="relative text-slate-500 hover:text-primary">
-                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
+                               
                                 <span class="absolute -top-1 -right-1 flex h-3 w-3">
                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
                                     <span class="relative inline-flex rounded-full h-3 w-3 bg-secondary"></span>
@@ -621,12 +620,12 @@
                     </div>
                     <div>
                         <span class="block text-sm font-medium text-slate-500 dark:text-slate-400">Duración</span>
-                        <span class="block">${appState.selectedCall.duracion} minutos</span>
+                        <span class="block">${appState.selectedCall.duracion_minutos || appState.selectedCall.duracion || 'No especificada'} minutos</span>
                     </div>
-                    ${appState.selectedCall.notas ? `
+                    ${(appState.selectedCall.notas_observaciones || appState.selectedCall.notas) ? `
                         <div>
                             <span class="block text-sm font-medium text-slate-500 dark:text-slate-400">Notas / Observaciones</span>
-                            <p class="bg-slate-50 dark:bg-slate-700 p-4 rounded-lg mt-2 whitespace-pre-wrap">${appState.selectedCall.notas}</p>
+                            <p class="bg-slate-50 dark:bg-slate-700 p-4 rounded-lg mt-2 whitespace-pre-wrap">${appState.selectedCall.notas_observaciones || appState.selectedCall.notas}</p>
                         </div>
                     ` : ''}
                     <div>

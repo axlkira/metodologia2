@@ -173,10 +173,7 @@
                         <button @click="isSidebarOpen = !isSidebarOpen" class="lg:hidden text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white mr-4">
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
                         </button>
-                        <div class="relative hidden sm:block">
-                            <svg class="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-                            <input type="text" placeholder="Buscar por Folio o Integrante..." class="w-full max-w-xs pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                        </div>
+                        
                     </div>
                     
                     <div class="flex items-center gap-4">
@@ -225,7 +222,7 @@
                 <div x-show="currentView === 'directorio'" x-transition>
                     <div class="flex items-center justify-between mb-6">
                         <h1 class="text-3xl font-bold">Directorio de Hogares</h1>
-                        <button class="bg-primary hover:bg-primary-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>Nuevo Hogar</button>
+                        
                     </div>
 
                                         <!-- Search Form -->
@@ -258,7 +255,7 @@
                                         </div>
                                     </div>
 
-                                    <a href="<?php echo site_url('llamadas_m2/c_llamadas_m2/gestion_hogar/' . $hogar['folio']); ?>" class="mt-4 block w-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold py-2 px-4 rounded-lg text-center">Gestionar Hogar</a>
+                                    <a href="<?php echo site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/' . $hogar['folio']); ?>" class="mt-4 block w-full bg-primary/10 hover:bg-primary/20 text-primary font-semibold py-2 px-4 rounded-lg text-center">Gestionar Hogar</a>
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
