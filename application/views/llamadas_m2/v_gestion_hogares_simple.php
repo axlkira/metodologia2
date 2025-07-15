@@ -280,7 +280,7 @@
                             <!-- Paso 3: Logros -->
                             <div id="step-3" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
                                 <h2 class="text-xl font-bold mb-4">Logros</h2>
-                                <p>Información sobre los logros conseguidos por la familia.</p>
+                                <p>Aqui puedes movilizar los logros.</p>
                                 <div class="mt-6">
                                     <a href="<?php echo site_url('logros/c_dimensiones/fc_dimensiones').'?folio='.htmlspecialchars($hogar->folio).'&idintegrante=0&doccogestor='.$this->session->userdata('documento'); ?>" target="_blank" class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/80 text-white font-medium rounded-lg transition-colors duration-300">
                                         <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -295,6 +295,14 @@
                             <div id="step-4" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
                                 <h2 class="text-xl font-bold mb-4">Gestión del Hogar</h2>
                                 <p>Gestión del hogar y sus necesidades.</p>
+                                <div class="mt-6">
+                                    <a href="<?php echo site_url('c_acercaroportunidad/fc_acercaroportunidad').'?folio='.htmlspecialchars($hogar->folio).'&idintegrante='.htmlspecialchars($hogar->idintegrantetitular).'&doccogestor='.$this->session->userdata('documento'); ?>" target="_blank" class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/80 text-white font-medium rounded-lg transition-colors duration-300">
+                                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                        </svg>
+                                        Acercar Oportunidad
+                                    </a>
+                                </div>
                             </div>
                             
                             <!-- Paso 5: Finalización -->
