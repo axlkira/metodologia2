@@ -248,7 +248,7 @@
                     <div class="row">
                     <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-10">
-                            <button  class="btn btn-info col-md-6" type="button" data-toggle="modal" data-target="#modalAddTracking6" id="modpaso6" <?php if(($midpaso['maximoidpaso'] == '202234')){echo ('enabled');} else {echo ('disabled');}?>>
+                            <button  class="btn btn-info col-md-6" type="button" data-toggle="modal" data-target="#modalPaso5" id="modpaso5" <?php if(($midpaso['maximoidpaso'] == '202234')){echo ('enabled');} else {echo ('disabled');}?>>
                                <p class="text-left"><span class="badge">Paso 5</span> ------ Acercamiento de oportunidades ------</p>
                             </button>
                         </div>
@@ -256,7 +256,7 @@
                     </div>
                     <!--fin boton para definir un paso-->
                     <!--inicio modal paso anterior-->
-                            <div class="modal fade" id="modalAddTracking6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalPaso5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -270,7 +270,7 @@ La información de las oportunidades debe quedar registrada en la historia del h
                                         </h5>    
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button"  onclick="paso5('202235');" name=cerrar6 id=cerrar6 class="btn btn-info" data-dismiss="modal">Cerrar</button>
+                                            <button type="button"  onclick="paso5('202235');" name="cerrar5" id="cerrar5" class="btn btn-info" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -281,14 +281,14 @@ La información de las oportunidades debe quedar registrada en la historia del h
                     <div class="row">
                     <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-10">
-                            <button  class="btn btn-info col-md-6" type="button" data-toggle="modal" data-target="#modalAddTracking6" id="modpaso6" <?php if(($midpaso['maximoidpaso'] == '202235')){echo ('enabled');} else {echo ('disabled');}?>>
+                            <button  class="btn btn-info col-md-6" type="button" data-toggle="modal" data-target="#modalPaso6" id="modpaso6" <?php if(($midpaso['maximoidpaso'] == '202235')){echo ('enabled');} else {echo ('disabled');}?>>
                                 <p class="text-left"><span class="badge">Paso 6</span> ----- Repaso del proceso de acompañamiento Familiar</p>
                             </button>
                         </div>
                     </div>
                     </div>
                     <!--inicio modal-->
-                            <div class="modal fade" id="modalAddTracking6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="modalPaso6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -557,7 +557,7 @@ function paso7(idpaso) {
             url: "../c_protocolo_final/fc_cerrarpaso",
             data: { folio: $('#folio').val(), idpaso: idpaso },
             success: function(data) {
-                location.reload();
+                location.href = "../historiahogar/c_validacioneerf2/fc_validacioneerf2?folio="+ $('#folio').val() + "&idintegrante=0"+ "&doccogestor=" + $('#doccogestor').val()+ "&idestacion=20223";
             }
         });
     }
