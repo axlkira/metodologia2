@@ -59,6 +59,37 @@ class M_protocolo_final extends CI_Model {
      public function fm_insertarfolioexitoso($mfolio,$idestacion) {
         $this->db->query('call spinsertarfolioexitoso2('.$mfolio.','.$idestacion.');');
     }  
+
+     // Función que inserta el registro final en t_protocoloestacionestado
+     public function fm_guardar_protocolo_final($mfolio)
+     {
+         // 1. Preparamos los datos que vamos a insertar
+         $data = array(
+             'folio' => $mfolio,
+             'idestacion' => 20223, // Valor fijo según tu requerimiento
+             'estado' => 2,        // Valor fijo según tu requerimiento
+             'fecharegistro' => date('Y-m-d H:i:s'), // Fecha y hora actual
+             'sincro' => 0         // Valor fijo según tu requerimiento
+         );
+ 
+         // 2. Usamos el Query Builder de CodeIgniter para hacer la inserción
+         // El primer parámetro es el nombre de la tabla, el segundo son los datos.
+         $this->db->insert('t_protocoloestacionestado', $data);
+     }
+
+     // Función para verificar si el protocolo ya fue finalizado
+     public function fm_verificar_protocolo_finalizado($mfolio)
+     {
+        $this->db->select('COUNT(*) as total');
+        $this->db->from('t_protocoloestacionestado');
+        $this->db->where('folio', $mfolio);
+        $this->db->where('idestacion', 20223);
+        $query = $this->db->get();
+        $result = $query->row();
+
+        // Si el conteo es mayor a 0, significa que ya existe un registro.
+        return ($result->total > 0);
+     }
     
      public function fm_insertarfoliohogarintermedia($mfolio)
              {

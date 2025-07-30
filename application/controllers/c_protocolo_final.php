@@ -82,9 +82,12 @@ class  C_protocolo_final extends CI_Controller {
             
             
      
+       // Verificamos si el protocolo ya ha sido guardado como finalizado
+        $protocolo_finalizado = $this->m_protocolo_final->fm_verificar_protocolo_finalizado($folio);
+            
        //ESTO LEVANTA LA VISTA     
         $titulo = 'v_protocolo_final'; // para el titulo de la vista en la pestaña
-        $this->load->view('pages/' . $page,  array('titulo' => $titulo, 'foot' => FOOTS, 'head3' => HEAD3, 'botonerag' => BOTONERAG, 'botoneraa' => BOTONERAA, 'folio' => $folio,'tdatinte' => $tdatinte, 'midpaso' => $midpaso, 'midpaso81' => $midpaso81, 'doccogestor' => $doccogestor, 'tdatidvisita' => $tdatidvisita));
+        $this->load->view('pages/' . $page,  array('titulo' => $titulo, 'foot' => FOOTS, 'head3' => HEAD3, 'botonerag' => BOTONERAG, 'botoneraa' => BOTONERAA, 'folio' => $folio,'tdatinte' => $tdatinte, 'midpaso' => $midpaso, 'midpaso81' => $midpaso81, 'doccogestor' => $doccogestor, 'tdatidvisita' => $tdatidvisita, 'protocolo_finalizado' => $protocolo_finalizado));
         //FIN LEVANTA LA VISTA
     }
     
@@ -126,6 +129,19 @@ class  C_protocolo_final extends CI_Controller {
        $this->m_protocolo_final->fm_insertarfoliohogarintermedia($cfolio);
     }
     // FIN FUNCION QUE REGISTRA CADA PASO FINALIZADO
+
+
+     // Función para guardar el estado final del protocolo
+     public function fc_guardar_protocolo_final()
+     {
+         // 1. Recibir el folio desde la vista (enviado por AJAX con POST)
+         $cfolio = $this->input->post('folio');
+ 
+         // 2. Llamar a la función del modelo para que inserte en la BD
+         $this->m_protocolo_final->fm_guardar_protocolo_final($cfolio);
+ 
+         // 3. No se necesita devolver nada a la vista (la llamada AJAX no espera respuesta)
+     }
     
     
      public function fc_saltohogarintermedia()
@@ -195,4 +211,3 @@ public function fc_calcularFechaPHP()
     
     
     
-

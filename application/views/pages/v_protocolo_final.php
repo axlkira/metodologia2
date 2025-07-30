@@ -415,7 +415,11 @@ La información de las oportunidades debe quedar registrada en la historia del h
                             echo '&nbsp';           
                             echo('<button class="btn btn-danger type="button" id="guardar" disabled="" name="guardar">---- Guardar ----</button>');
                             }
-                            else if($midpaso81['emaximoidpaso81']=='9006')
+                            else if($protocolo_finalizado)
+                            {
+                            echo('<button class="btn btn-danger" type="button" id="anterior" name="anterior"> << Anterior</button>');
+                            }
+                            else 
                             {
                             echo('<button class="btn btn-danger" type="button" id="anterior" name="anterior"> << Anterior</button>');
                             echo '&nbsp';           
@@ -634,24 +638,50 @@ function insertidpaso()
                 {
                  $('#guardar').prop('disabled', true);
                  $('#anterior').prop('disabled', true);
-                 mensajedesinco();
-                 calcularprivacionesinter();
+                 
+                 // Mostrar modal
+                 var modal = mensajedesinco();
+
+                   // Llamada AJAX para guardar el estado final de la estación
+                   $.ajax({
+                    type: "POST",
+                    url: "../c_protocolo_final/fc_guardar_protocolo_final",
+                    data: { folio: $('#folio').val() },
+                    success: function(response) {
+                        console.log('Protocolo final guardado con éxito.');
+                        // Cerramos el modal cuando la operación es exitosa
+                        modal.modal('hide');
+                        
+                        // Habilitamos solo el botón anterior
+                        $('#anterior').prop('disabled', false);
+                        
+                        // Mostramos mensaje de éxito
+                        new jBox('Notice', {
+                            content: '¡Guardado con éxito!',
+                            color: 'green',
+                            animation: {open: 'tada', close: 'flip'},
+                            position: {x: 'center', y: 'center'},
+                            autoClose: 2500
+                        });
+                    },
+                    error: function() {
+                        console.error('Error al guardar el protocolo final.');
+                        // Cerramos el modal en caso de error también
+                        modal.modal('hide');
+                        
+                        // Habilitamos ambos botones para que el usuario pueda reintentar
+                        $('#guardar').prop('disabled', false);
+                        $('#anterior').prop('disabled', false);
+                    }
+                });
+
                 });
                 //fin de la funcion guardar
         $("#siguiente").click(function ()
                 {
                    // alert('juapis');
-                 location.href = "../c_protocolol1e2/fc_protocolol1e2?folio="+ $('#folio').val() +"&idintegrante=0";
-                    
-                });
-                //fin de la funcion siguiente
-                
-                //esta funcion es para atras
-                //si las preguntas son por hogar mandar idintegrante en 0                
-        $("#anterior").click(function ()
-                {
-                   // alert('juapis');
-                location.href = "../c_principalprotocolo/fc_principalprotocolo?folio="+ $('#folio').val() +"&idintegrante=0"+"&doccogestor="+$('#doccogestor').val();                  
+               /*  location.href = "../c_principalprotocolo/fc_principalprotocolo?folio="+ $('#folio').val() +"&idintegrante=0"+"&doccogestor="+$('#doccogestor').val();                   */
+               location.href = "../c_principalhogar/fc_principalhogar";
                 });
 
 
@@ -687,7 +717,12 @@ $("#guardapaso0").click(function ()
 /////////////////////////////////////// FIN Funciones que llaman al controlador para guardar y actualizar////////////////////////////////////////////////////////////////////////        
 function mensajedesinco()
 {
-    $('#modalsinco').modal('show');
+    // Creamos el modal pero NO lo mostramos aún
+    var modal = $('#modalsinco');
+    // Mostramos el modal
+    modal.modal('show');
+    // Devolvemos el modal para poder referenciarlo después
+    return modal;
 }
 
 function terminasinco()
