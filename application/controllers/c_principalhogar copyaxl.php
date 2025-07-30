@@ -92,8 +92,8 @@ class  C_principalhogar extends CI_Controller {
         }
         else
         {
-            // Quitar la restricción para Línea 1 Estación 1 (idestacion == '11'), Línea 1 Estación 2 (idestacion == '12'), Estación H (idestacion == '10') y Estación 21 (idestacion == '21')
-            if($valor->idestacion == '10' || $valor->idestacion == '11' || $valor->idestacion == '12' ){
+            // Quitar la restricción para Línea 1 Estación 1 (idestacion == '11'), Línea 1 Estación 2 (idestacion == '12') y Estación H (idestacion == '10')
+            if($valor->idestacion == '10' || $valor->idestacion == '11' || $valor->idestacion == '12'){
                 $bloqueo = '<td><button type="button" id="Protocolo" onclick="iraprotocolo('.$valor->folio.','.$valor->idintegrantetitular.','.$valor->doccogestor.')" class="btn btn-success  btn-sm" title="Esta opción va al módulo donde se selecciona la línea y estación para realizar la visita de acompañamiento familiar.">&nbsp;Protocolo&nbsp;</button></td>';
             }else if($valor->diastranscurridos == ''){
                 $bloqueo = '<td><button type="button" id="Protocolo" onclick="iraprotocolo('.$valor->folio.','.$valor->idintegrantetitular.','.$valor->doccogestor.')" class="btn btn-success  btn-sm" title="Esta opción va al módulo donde se selecciona la línea y estación para realizar la visita de acompañamiento familiar. (No se ha realizado Visita)">&nbsp;Protocolo&nbsp;</button></td>';
@@ -326,8 +326,8 @@ class  C_principalhogar extends CI_Controller {
                     '.$bloqueoeerf.'   
                     <td><button type="button" id="ellbf" onclick="iraprotocolo('.$valor->folio.','.$valor->idintegrantetitular.','.$valor->doccogestor.'),editallbf('.$valor->folio.','.$valor->idintegrantetitular.')" class="btn btn-success btn-sm" title="Esta opción va a la visita de línea de clasificación, pero es una edición de la primera visita realizada.">EDICION LDC</button></td>
                     '.$vencuadref.'  
-                    <td style="display:none">'.$porcetotal.'</td>                    
-                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
+                    <td>'.$porcetotal.'</td>                    
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Llamar</a></td>
                    </tr>';
             }        
               // linea 2 estacion 3

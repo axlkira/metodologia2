@@ -6,16 +6,16 @@
     <title>Unidad Familia Medellín - Panel Principal</title>
     
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/tailwind-custom.css'); ?>">
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- jQuery -->
   <!--   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
      <script src="<?php echo base_url('assets/js/jquery-3.6.0.min.js'); ?>"></script>
     
     <!-- Fuentes -->
- <!--    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -114,7 +114,7 @@
                     
                     <div class="overflow-y-auto flex-1 p-4">
                         <nav class="space-y-2">
-                            <a href="../../../../c_principalhogar/fc_principalhogar" class="flex items-center px-4 py-2.5 rounded-lg bg-primary text-white transition-colors">
+                            <a href="../../../../llamadas_m2/c_llamadas_m2" class="flex items-center px-4 py-2.5 rounded-lg bg-primary text-white transition-colors">
                                 <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                 </svg>
@@ -162,7 +162,7 @@
                     <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md mb-6">
                         <div class="flex flex-wrap justify-between items-center gap-4">
                             <div>
-                                <a href="<?php echo site_url('c_principalhogar/fc_principalhogar'); ?>" class="text-primary hover:underline mb-2 flex items-center gap-1">
+                                <a href="<?php echo site_url('llamadas_m2/c_llamadas_m2'); ?>" class="text-primary hover:underline mb-2 flex items-center gap-1">
                                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
                                     Volver
                                 </a>
@@ -267,8 +267,7 @@
                             <!-- Paso 2: Actualización de datos -->
                             <div id="step-2" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
                                 <h2 class="text-xl font-bold mb-4">Actualización de datos</h2>
-                               <!--  <p>El Gestor saluda y verifica si el hogar o alguno de sus integrantes requiere actualizar sus datos generales.</p> -->
-                               <p>Al Presionar Clic en Actualizar Perfil Productivo se abre una nueva pestaña con el módulo de actualización de datos.</p>
+                                <p>El Gestor saluda y verifica si el hogar o alguno de sus integrantes requiere actualizar sus datos generales.</p>
                                 <div class="mt-6">
                                     <a href="<?php echo site_url('perfilproductivo/c_actualizarpp/fc_actualizarpp').'?folio='.htmlspecialchars($hogar->folio).'&idintegrante=0&doccogestor='.$this->session->userdata('documento'); ?>" target="_blank" class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/80 text-white font-medium rounded-lg transition-colors duration-300">
                                         <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -282,7 +281,7 @@
                             <!-- Paso 3: Logros -->
                             <div id="step-3" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
                                 <h2 class="text-xl font-bold mb-4">Logros</h2>
-                                <p>Aqui puedes movilizar los logros del Hogar.</p>
+                                <p>Aqui puedes movilizar los logros.</p>
                                 <div class="mt-6">
                                     <a href="<?php echo site_url('logros/c_dimensiones/fc_dimensiones').'?folio='.htmlspecialchars($hogar->folio).'&idintegrante=0&doccogestor='.$this->session->userdata('documento'); ?>" target="_blank" class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/80 text-white font-medium rounded-lg transition-colors duration-300">
                                         <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -295,8 +294,8 @@
                             
                             <!-- Paso 4: Gestión del Hogar -->
                             <div id="step-4" class="step-content bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md hidden">
-                                <h2 class="text-xl font-bold mb-4">Gestión de Oportunidades</h2>
-                                <p>Al presionar Clic en Acercar Oportunidad se abre una nueva pestaña con el módulo de acercamiento a oportunidades.</p>
+                                <h2 class="text-xl font-bold mb-4">Gestión del Hogar</h2>
+                                <p>Gestión del hogar y sus necesidades.</p>
                                 <div class="mt-6">
                                     <a href="<?php echo site_url('c_acercaroportunidad/fc_acercaroportunidad').'?folio='.htmlspecialchars($hogar->folio).'&idintegrante='.htmlspecialchars($hogar->idintegrantetitular).'&doccogestor='.$this->session->userdata('documento'); ?>" target="_blank" class="inline-flex items-center px-4 py-2 bg-primary hover:bg-primary/80 text-white font-medium rounded-lg transition-colors duration-300">
                                         <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
