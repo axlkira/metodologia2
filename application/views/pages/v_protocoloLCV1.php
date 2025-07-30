@@ -100,7 +100,7 @@
                                         </div><br>
                                         <div class="row">
                                         <div><center>
-                                        <button type="button"  name=guardapaso0 id=guardapaso0 disabled="disabled" class="btn btn-success" >Guardar</button>
+                                        <button type="button"  name="guardapaso0" id="guardapaso0" disabled="disabled" class="btn btn-success" >Guardar</button>
                                         <button type="button"  onclick="paso0();" disabled="disabled" name="cerrar0" id="cerrar0" class="btn btn-danger" data-dismiss="modal">Continuar</button>
                                         <button type="button" class="btn btn-gray" data-dismiss="modal" name="Close0" id="Close0" aria-label="Close">Cerrar</button></center>
                                         </div>    

@@ -66,10 +66,10 @@ class M_protocolo_final extends CI_Model {
          // 1. Preparamos los datos que vamos a insertar
          $data = array(
              'folio' => $mfolio,
-             'idestacion' => 20223, // Valor fijo según tu requerimiento
-             'estado' => 2,        // Valor fijo según tu requerimiento
+             'idestacion' => 20223, 
+             'estado' => 2,        
              'fecharegistro' => date('Y-m-d H:i:s'), // Fecha y hora actual
-             'sincro' => 0         // Valor fijo según tu requerimiento
+             'sincro' => 0         
          );
  
          // 2. Usamos el Query Builder de CodeIgniter para hacer la inserción

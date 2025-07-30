@@ -677,7 +677,7 @@ function insertidpaso()
 
                 });
                 //fin de la funcion guardar
-        $("#siguiente").click(function ()
+        $("#anterior").click(function ()
                 {
                    // alert('juapis');
                /*  location.href = "../c_principalprotocolo/fc_principalprotocolo?folio="+ $('#folio').val() +"&idintegrante=0"+"&doccogestor="+$('#doccogestor').val();                   */

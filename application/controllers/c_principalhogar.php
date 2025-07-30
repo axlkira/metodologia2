@@ -287,15 +287,28 @@ class  C_principalhogar extends CI_Controller {
              // linea 2 estacion 2
              //if($valor->idestacion == '21' && $valor->intermedia == ''){
                  if($valor->idestacion == '21'){
-                     // Traer los porcentajes de logros verdes y grises para este folio
-    $logros = $this->m_dimensiones->fm_totalporcentajelogros($valor->folio);
-    $porceverd = 0;
-    $porcegris = 0;
-    if (!empty($logros)) {
-        $porceverd = isset($logros[0]->porceverd) ? floatval($logros[0]->porceverd) : 0;
-        $porcegris = isset($logros[0]->porcegris) ? floatval($logros[0]->porcegris) : 0;
-    }
-    $porcetotal = $porceverd + $porcegris;
+                   // Calcular porcentaje de logros verdes DI usando los valores TOTALES (exactamente igual que en v_dimensiones.php L59-60)
+// Traer los datos con fm_totalporcentajelogros (igual que en c_dimensiones.php L69)
+$folioexisteporcen = $this->m_dimensiones->fm_totalporcentajelogros($valor->folio);        
+$foexisteporcen = array('etotalrojo' => '', 'etotalverd' => ''); 
+
+// Construimos el arreglo asociativo exactamente igual que en c_dimensiones.php L74-76
+foreach ($folioexisteporcen as $fila) {
+    $foexisteporcen['etotalrojo'] = $fila->totalrojo;
+    $foexisteporcen['etotalverd'] = $fila->totalverd;
+}
+
+// Variables para los cálculos con los valores reales TOTALES
+$verdes = floatval($foexisteporcen['etotalverd']); // 62 para el folio de ejemplo
+$rojos = floatval($foexisteporcen['etotalrojo']);  // 18 para el folio de ejemplo
+$porcentajeDI = 0;
+$porcetotal = 0;
+
+// Calculamos el porcentaje según la fórmula exacta (verdes/(verdes+rojos))*100
+if (($verdes + $rojos) > 0) {
+    $porcentajeDI = round(($verdes / ($verdes + $rojos)) * 100);
+    $porcetotal = $porcentajeDI; // Para mantener consistencia en ambas columnas
+}
                  $cont2= 0;
                 ++$cont2;
                 ++$a3e1;
@@ -326,7 +339,8 @@ class  C_principalhogar extends CI_Controller {
                     '.$bloqueoeerf.'   
                     <td><button type="button" id="ellbf" onclick="iraprotocolo('.$valor->folio.','.$valor->idintegrantetitular.','.$valor->doccogestor.'),editallbf('.$valor->folio.','.$valor->idintegrantetitular.')" class="btn btn-success btn-sm" title="Esta opción va a la visita de línea de clasificación, pero es una edición de la primera visita realizada.">EDICION LDC</button></td>
                     '.$vencuadref.'  
-                    <td style="display:none">'.$porcetotal.'</td>                    
+                      
+                    <td>'.$porcentajeDI.'</td>                 
                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }        
@@ -908,7 +922,7 @@ if($valor->idestacion == '91'){
                         else if($valor->idestacion_protocolo == '28'){$idestacion_protocolo_real = 'Línea 2 Estacion 8';}
                         else if($valor->idestacion_protocolo == '31'){$idestacion_protocolo_real = 'Estación de finalización';}
                         else if($valor->idestacion_protocolo == '81'){$idestacion_protocolo_real = 'Visita intermedia';}
-                        else if($valor->idestacion_protocolo == '90'){$idestacion_protocolo_real = 'Visita intermedia de cierre';}
+                        /* else if($valor->idestacion_protocolo == '90'){$idestacion_protocolo_real = 'Visita intermedia de cierre';} */
                         else if($valor->idestacion_protocolo == '91'){$idestacion_protocolo_real = 'Cierre administrativo';}
                         else if($valor->idestacion_protocolo == '100'){$idestacion_protocolo_real = 'Edición de la línea de clasificación';}
                         else {$idestacion_protocolo_real = 'Sin dato';}
@@ -930,7 +944,7 @@ if($valor->idestacion == '91'){
                         else if($valor->idestacion_pasos == '28'){$idestacion_paso_real = 'Línea 2 Estacion 8';}
                         else if($valor->idestacion_pasos == '31'){$idestacion_paso_real = 'Estación de finalización';}
                         else if($valor->idestacion_pasos == '81'){$idestacion_paso_real = 'Visita intermedia';}
-                        else if($valor->idestacion_pasos == '90'){$idestacion_paso_real = 'Visita intermedia de cierre';}
+                       /*  else if($valor->idestacion_pasos == '90'){$idestacion_paso_real = 'Visita intermedia de cierre';} */
                         else if($valor->idestacion_pasos == '91'){$idestacion_paso_real = 'Cierre administrativo';}
                         else if($valor->idestacion_pasos == '100'){$idestacion_paso_real = 'Edición de la línea de clasificación';}
                         else {$idestacion_paso_real = 'Sin dato';}
