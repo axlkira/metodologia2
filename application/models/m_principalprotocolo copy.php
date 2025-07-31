@@ -205,18 +205,8 @@ public function fm_traermomento_vi($mfolio)
         $query->free_result(); //NO SE TOCAN  Estas dos funciones permiten realizar varias consultas en el mismo controlador.
         return $resultado;        
     }    
-    
-    public function fm_totalporcentajelogros($folio)
-    {
-        $query = $this->db->query('call sptotalporcentajelogros('.$folio.');');
-        $resultado = $query->result();
-        $query->next_result(); //NO SE TOCAN Estas dos funciones permiten realizar varias consultas en el mismo controlador.
-        $query->free_result(); //NO SE TOCAN  Estas dos funciones permiten realizar varias consultas en el mismo controlador.
-        return $resultado;        
-    }
 
 
 
 
-
-}
+}      

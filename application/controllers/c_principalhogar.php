@@ -387,7 +387,8 @@ if (($verdes + $rojos) > 0) {
                     '.$bloqueoeerf.'
                     <td><button type="button" id="ellbf" onclick="iraprotocolo('.$valor->folio.','.$valor->idintegrantetitular.','.$valor->doccogestor.'),editallbf('.$valor->folio.','.$valor->idintegrantetitular.')" class="btn btn-success btn-sm" title="Esta opción va a la visita de línea de clasificación, pero es una edición de la primera visita realizada.">EDICION LDC</button></td>
                     '.$vencuadref.'  
-                    <td>'.$porcetotal.'</td>
+                    
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             // linea 2 estacion 4
@@ -436,7 +437,8 @@ if (($verdes + $rojos) > 0) {
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
-                    <td>'.$porcetotal.'</td>
+                    
+                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             
@@ -482,7 +484,7 @@ if (($verdes + $rojos) > 0) {
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
-                    <td>'.$porcetotal.'</td>
+                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             // linea 2 estacion 6
@@ -526,7 +528,7 @@ if (($verdes + $rojos) > 0) {
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
-                    <td>'.$porcetotal.'</td>
+                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             // linea 2 estacion 7
@@ -573,7 +575,7 @@ if (($verdes + $rojos) > 0) {
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
-                    <td>'.$porcetotal.'</td>
+                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
 
@@ -627,7 +629,7 @@ $datosl2e7 .=  '<tr '.$colorfila3.'>'
     '.$bloqueoeerf.'
     '.$editllbf.'
     '.$vencuadref.'  
-    <td>'.$porcetotal.'</td>
+     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
    </tr>';
             }
 
@@ -666,6 +668,7 @@ $datosl2e7 .=  '<tr '.$colorfila3.'>'
                     '.$bloqueoprivaciones.'
                     '.$bloqueoeerf.'
                     '.$vencuadref.'  
+                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
 
@@ -702,6 +705,7 @@ $datosl2e7 .=  '<tr '.$colorfila3.'>'
              '.$bloqueoprivaciones.'
              '.$bloqueoeerf.'
              '.$vencuadref.'  
+              <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
             </tr>';
      }  
 
@@ -738,6 +742,7 @@ if(($valor->idestacion == '90' && $valor->casilla <> '9' && $valor->casilladf <>
           '.$bloqueoeerf.'
           '.$vencuadref.'
           '.$botoncasilladflcv1.'
+           <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
          </tr>';
   }  
 
@@ -773,6 +778,7 @@ if($valor->idestacion == '91'){
           '.$bloqueoeerf.'
           '.$vencuadref.'
           '.$botoncasilladflcv1.'
+           <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
          </tr>';
   }  
 
@@ -812,6 +818,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$vencuadref.'
                     '.$botoncasilladflcv1.'  
+                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             
@@ -847,6 +854,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$vencuadref.'  
                     '.$botoncasilladflcv1.'
+                     <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }     //.'<td><button type="button" id="logrosprom" onclick="logrosprom('.$valor->folio.','.$valor->doccogestor.')"class="btn btn-default btn-sm" title="Esta opción va al módulo de diagnóstico inicial y actual de logros, tanto del hogar como de los integrantes, pero no se puede realizar el movimiento de logros.">Logros promovidos</button></td>
             
@@ -1330,6 +1338,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'    
                     <td><button type="button" id="ellbf" onclick="iraprotocolo('.$valor->folio.','.$valor->idintegrantetitular.','.$valor->doccogestor.'),editallbf('.$valor->folio.','.$valor->idintegrantetitular.')" class="btn btn-success btn-sm" title="Esta opción va a la visita de línea de clasificación, pero es una edición de la primera visita realizada.">EDICION LDC</button></td>
                     '.$vencuadref.'  
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }        
               // linea 2 estacion 3
@@ -1365,6 +1374,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     <td><button type="button" id="ellbf" onclick="iraprotocolo('.$valor->folio.','.$valor->idintegrantetitular.','.$valor->doccogestor.'),editallbf('.$valor->folio.','.$valor->idintegrantetitular.')" class="btn btn-success btn-sm" title="Esta opción va a la visita de línea de clasificación, pero es una edición de la primera visita realizada.">EDICION LDC</button></td>
                     '.$vencuadref.'  
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             // linea 2 estacion 4
@@ -1403,6 +1413,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             // linea 2 estacion 5
@@ -1438,6 +1449,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             // linea 2 estacion 6
@@ -1473,6 +1485,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
             // linea 2 estacion 7
@@ -1509,6 +1522,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$editllbf.'
                     '.$vencuadref.'  
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
 
@@ -1546,6 +1560,7 @@ if(($valor->idestacion == '27' && $valor->casilla <> '9' && $valor->casilladf <>
         '.$bloqueoeerf.'
         '.$editllbf.'
         '.$vencuadref.'  
+        <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
        </tr>';
 }
 
@@ -1584,6 +1599,7 @@ if(($valor->idestacion == '27' && $valor->casilla <> '9' && $valor->casilladf <>
                     '.$bloqueoprivaciones.'
                     '.$bloqueoeerf.'
                     '.$vencuadref.'  
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
 
@@ -1621,6 +1637,7 @@ if(($valor->idestacion == '27' && $valor->casilla <> '9' && $valor->casilladf <>
              '.$bloqueoprivaciones.'
              '.$bloqueoeerf.'
              '.$vencuadref.'  
+             <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
             </tr>';
      }
 
@@ -1659,6 +1676,7 @@ if(($valor->idestacion == '90' && $valor->casilla <> '9' && $valor->casilladf <>
           '.$bloqueoeerf.'
           '.$vencuadref.'  
           '.$botoncasilladflcv1.'
+          <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
          </tr>';
   }  
 
@@ -1694,6 +1712,7 @@ if($valor->idestacion == '91'){
           '.$bloqueoeerf.'
           '.$vencuadref.'  
           '.$botoncasilladflcv1.'
+          <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
          </tr>';
   }  
 
@@ -1736,6 +1755,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$vencuadref.'  
                     '.$botoncasilladflcv1.'
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }
 
@@ -1771,6 +1791,7 @@ if($valor->idestacion == '91'){
                     '.$bloqueoeerf.'
                     '.$vencuadref.'  
                     '.$botoncasilladflcv1.'
+                    <td><a href="'.site_url('llamadas_m2/c_llamadas_m2/vista_hogar_simple/'.$valor->folio).'" class="btn btn-info btn-sm" target="_blank">Seguimiento telefónico</a></td>
                    </tr>';
             }    //.'<td><button type="button" id="logrosprom" onclick="logrosprom('.$valor->folio.','.$valor->doccogestor.')"class="btn btn-default btn-sm" title="Esta opción va al módulo de diagnóstico inicial y actual de logros, tanto del hogar como de los integrantes, pero no se puede realizar el movimiento de logros.">Logros promovidos</button></td>
             

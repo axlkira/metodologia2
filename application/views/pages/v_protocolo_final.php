@@ -695,7 +695,7 @@ $("#guardapaso0").click(function ()
                           url: "fc_actualizarep0",
                           type: "GET",
                           data: {vfolio : $('#folio').val(),
-                                 videstacion : '90',
+                                 videstacion : '20223',
                                  vvalorp0 : $('#valorp0').val(),
                                  vvcualmotivo : $('#vcualmotivo').val(),
                                  vdoccogestor : $('#doccogestor').val()},    

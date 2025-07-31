@@ -69,7 +69,7 @@
                   </div>-->
                 
                 
-                  <div class="panel panel-default" <?php if(isset($porcentaje_di) && $porcentaje_di['porcentaje_logros'] >= 70) echo 'style="display: none;"'; ?>>
+                  <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne">
                       <h4 class="panel-title">
                           <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onclick="desatraceestacioncero1(<?php echo $folio ?>)">
@@ -95,7 +95,7 @@
                   </div>
 
                 
-                  <div class="panel panel-default" <?php if(isset($porcentaje_di) && $porcentaje_di['porcentaje_logros'] >= 70) echo 'style="display: none;"'; ?>>
+                <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingtwo">
                       <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo">
@@ -144,7 +144,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="panel panel-default" <?php if(isset($porcentaje_di) && $porcentaje_di['porcentaje_logros'] >= 70) echo 'style="display: none;"'; ?>>
+                
+                  <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingThree">
                       <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -183,41 +184,12 @@
 
 
 <!--                        <a id="estacion31" class="btn btn-warning btn-sm col-lg-offset-1" <?php if (($midestacion['maximoidestacion']=='22' && $casillas['ecasillamatriz'] == '9' && $casillas['intermedia'] == '')|| ($midestacion['maximoidestacion']=='23' && $casillas['ecasillamatriz'] == '9'&& $casillas['intermedia'] == '')) {if($minidestacion['minimoidestacion'] == '10'){echo ('enabled');}else{echo ('disabled');}} else {echo ('disabled');}?>><span class="badge">Sesion de cierre</span></a><br><br>-->
-                                                                       
+                                                                      
                       </div>
                     </div>
                   </div>
 
-                  <?php if ($porcentaje_di['mostrar_linea_medicion']): ?>
-                  <!-- Panel para línea de medición y finalización (se muestra solo si el porcentaje es >= 70%) -->
-                  <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingMedicion">
-                      <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseMedicion" aria-expanded="false" aria-controls="collapseMedicion">
-                         <span class="badge"><i class="glyphicon glyphicon-stats"></i></span> Línea de medición y finalización (<?php echo $porcentaje_di['porcentaje_logros']; ?>% logros alcanzados)
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseMedicion" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMedicion">
-                      <div class="panel-body">
-                        <div class="alert alert-success" role="alert">
-                          <p>
-                            <strong>Felicidades:</strong> Se ha alcanzado al menos el 70% de los logros requeridos.
-                            <!-- <br>
-                            Logros verdes: <?php echo $porcentaje_di['logros_verdes']; ?>
-                            <br>
-                            Logros rojos: <?php echo $porcentaje_di['logros_rojos']; ?>
-                            <br>
-                            Porcentaje: <?php echo $porcentaje_di['porcentaje_logros']; ?>% -->
-                          </p>
-                        </div>
-                        <a href="../c_protocolo_final/fc_protocolo_final?folio=<?php echo $folio; ?>&idintegrante=0" class="btn btn-primary btn-sm col-lg-offset-1"><span class="badge"><i class="glyphicon glyphicon-certificate"></i></span> Ir a Medición y Finalización</a><br><br>
-                      </div>
-                    </div>
-                  </div>
-                  <?php endif; ?>
-
-                  <div class="panel panel-default" <?php if(isset($porcentaje_di) && $porcentaje_di['porcentaje_logros'] >= 70) echo 'style="display: none;"'; ?>>
+                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingdiez">
                       <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsediez" aria-expanded="false" aria-controls="collapsediez">
@@ -258,7 +230,7 @@
 -->
 
 
-<div class="panel panel-default" <?php if(isset($porcentaje_di) && $porcentaje_di['porcentaje_logros'] >= 70) echo 'style="display: none;"'; ?>>
+                  <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingLC">
                       <h4 class="panel-title">
                         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseLC" aria-expanded="false" aria-controls="collapseLC">

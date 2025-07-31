@@ -158,55 +158,10 @@ class  C_principalprotocolo extends CI_Controller {
             $estadocasillalcv1 = array('ecasillamatrizlcv1' => $idcasillalcv1->casillamatrizlcv1); 
         }
         
-        // Cálculo del porcentaje de logros verdes (DI)
-        $foexisteporcen = $this->m_principalprotocolo->fm_totalporcentajelogros($folio);
-        $porcentaje_di = array('porcentaje_logros' => 0, 'logros_verdes' => 0, 'logros_rojos' => 0, 'mostrar_linea_medicion' => false);
-        
-        foreach ($foexisteporcen as $fila) {
-            // Extraer valores de logros verdes y rojos
-            $logros_verdes = $fila->totalverd;
-            $logros_rojos = $fila->totalrojo;
-            
-            // Cálculo del porcentaje: (verdes / (verdes + rojos)) * 100
-            $calculo_porcentaje = ($logros_verdes > 0 && ($logros_verdes + $logros_rojos) > 0) ?
-                                  round(($logros_verdes / ($logros_verdes + $logros_rojos)) * 100) : 0;
-            
-            // Determinar si se debe mostrar la línea de medición (≥ 70%)
-            $mostrar_linea_medicion = ($calculo_porcentaje >= 70);
-            
-            $porcentaje_di = array(
-                'porcentaje_logros' => $calculo_porcentaje,
-                'logros_verdes' => $logros_verdes,
-                'logros_rojos' => $logros_rojos,
-                'mostrar_linea_medicion' => $mostrar_linea_medicion
-            );
-        }
             
         //ESTO LEVANTA LA VISTA     
         $titulo = 'v_principalprotocolo'; // para el titulo de la vista en la pestaña
-        $this->load->view('pages/' . $page,  array(
-            'titulo' => $titulo, 
-            'foot' => FOOTS, 
-            'head3' => HEAD3, 
-            'botonerag' => BOTONERAG, 
-            'botoneraa' => BOTONERAA,
-            'folio' => $folio,
-            'tdatinte' => $tdatinte, 
-            'midestacion' => $midestacion,
-            'controleh' => $controleh,
-            'doccogestor' => $doccogestor,
-            'vectoreh'=>$vectoreh, 
-            'casillas'=>$casillas,
-            'casillasdf'=>$casillasdf,
-            'totalint' => $totalint,
-            'minidestacion'=>$minidestacion,
-            'pasodif81' =>$pasodif81,
-            'intermediahisto'=>$intermediahisto,
-            'estadoidestacion31'=>$estadoidestacion31,
-            'estadomomento_vi'=>$estadomomento_vi,
-            'estadocasillalcv1'=>$estadocasillalcv1,
-            'porcentaje_di' => $porcentaje_di // Agregamos la información del porcentaje a la vista
-        ));
+        $this->load->view('pages/' . $page,  array('titulo' => $titulo, 'foot' => FOOTS, 'head3' => HEAD3, 'botonerag' => BOTONERAG, 'botoneraa' => BOTONERAA,'folio' => $folio,'tdatinte' => $tdatinte, 'midestacion' => $midestacion,'controleh' => $controleh,'doccogestor' => $doccogestor,'vectoreh'=>$vectoreh, 'casillas'=>$casillas,'casillasdf'=>$casillasdf,'totalint' => $totalint,'minidestacion'=>$minidestacion,'pasodif81' =>$pasodif81,'intermediahisto'=>$intermediahisto,'estadoidestacion31'=>$estadoidestacion31,'estadomomento_vi'=>$estadomomento_vi,'estadocasillalcv1'=>$estadocasillalcv1));
         //FIN LEVANTA LA VISTA
         
     }
