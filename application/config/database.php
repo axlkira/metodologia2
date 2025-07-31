@@ -66,21 +66,7 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 //conexion a servidor
-$db['servidor']['hostname'] = '209.124.67.247';
-$db['servidor']['username'] = 'medelli1_msol';
-$db['servidor']['password'] = 'medellin';
-$db['servidor']['database'] = 'medelli1_bdprotocoloservidor';
-$db['servidor']['dbdriver'] = 'mysqli';
-$db['servidor']['dbprefix'] = '';
-$db['servidor']['pconnect'] = TRUE;
-$db['servidor']['db_debug'] = TRUE;
-$db['servidor']['cache_on'] = FALSE;
-$db['servidor']['cachedir'] = '';
-$db['servidor']['char_set'] = 'utf8';
-$db['servidor']['dbcollat'] = 'utf8_general_ci';
-$db['servidor']['swap_pre'] = '';
-$db['servidor']['autoinit'] = TRUE;
-$db['servidor']['stricton'] = FALSE;
+
 
 $db['default'] = array(
     'hostname' => 'db',
