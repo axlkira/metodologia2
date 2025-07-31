@@ -178,16 +178,27 @@ class C_llamadas_m2 extends CI_Controller {
             return;
         }
         
-        // Obtener porcentaje de logros (igual que en gestion_hogar)
-        $logros = $this->m_dimensiones->fm_totalporcentajelogros($folio);
-        $porceverd = 0;
-        $porcegris = 0;
-        if (!empty($logros)) {
-            $porceverd = isset($logros[0]->porceverd) ? floatval($logros[0]->porceverd) : 0;
-            $porcegris = isset($logros[0]->porcegris) ? floatval($logros[0]->porcegris) : 0;
+        // Obtener porcentaje de logros (exactamente igual que en c_principalhogar.php)
+        $folioexisteporcen = $this->m_dimensiones->fm_totalporcentajelogros($folio);        
+        $foexisteporcen = array('etotalrojo' => '', 'etotalverd' => ''); 
+
+        // Construimos el arreglo asociativo con los totales
+        foreach ($folioexisteporcen as $fila) {
+            $foexisteporcen['etotalrojo'] = $fila->totalrojo;
+            $foexisteporcen['etotalverd'] = $fila->totalverd;
         }
-        $porcetotal = $porceverd + $porcegris;
-        $data['porcentaje_total'] = round($porcetotal);
+
+        // Variables para los cálculos con los valores reales TOTALES
+        $verdes = floatval($foexisteporcen['etotalverd']);
+        $rojos = floatval($foexisteporcen['etotalrojo']);
+        $porcentajeDI = 0;
+
+        // Calculamos el porcentaje según la fórmula exacta (verdes/(verdes+rojos))*100
+        if (($verdes + $rojos) > 0) {
+            $porcentajeDI = round(($verdes / ($verdes + $rojos)) * 100);
+        }
+        
+        $data['porcentaje_total'] = $porcentajeDI;
         
         // Configuración adicional
         $data['vista_actual'] = 'gestion'; // Para resaltar el menú correcto
